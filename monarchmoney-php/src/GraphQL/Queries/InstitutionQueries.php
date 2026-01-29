@@ -1,0 +1,95 @@
+<?php
+
+declare(strict_types=1);
+
+namespace MonarchMoney\GraphQL\Queries;
+
+class InstitutionQueries
+{
+    public const GET_INSTITUTIONS = <<<'GRAPHQL'
+        query Web_GetInstitutionSettings {
+            credentials {
+                id
+                ...CredentialSettingsCardFields
+                __typename
+            }
+            accounts(filters: {includeDeleted: true}) {
+                id
+                displayName
+                subtype {
+                    display
+                    __typename
+                }
+                mask
+                credential {
+                    id
+                    __typename
+                }
+                deletedAt
+                __typename
+            }
+            subscription {
+                isOnFreeTrial
+                hasPremiumEntitlement
+                __typename
+            }
+        }
+
+        fragment CredentialSettingsCardFields on Credential {
+            id
+            updateRequired
+            disconnectedFromDataProviderAt
+            ...InstitutionInfoFields
+            institution {
+                id
+                name
+                url
+                __typename
+            }
+            __typename
+        }
+
+        fragment InstitutionInfoFields on Credential {
+            id
+            displayLastUpdatedAt
+            dataProvider
+            updateRequired
+            disconnectedFromDataProviderAt
+            ...InstitutionLogoWithStatusFields
+            institution {
+                id
+                name
+                hasIssuesReported
+                hasIssuesReportedMessage
+                __typename
+            }
+            __typename
+        }
+
+        fragment InstitutionLogoWithStatusFields on Credential {
+            dataProvider
+            updateRequired
+            institution {
+                hasIssuesReported
+                status
+                balanceStatus
+                transactionsStatus
+                __typename
+            }
+            __typename
+        }
+        GRAPHQL;
+
+    public const GET_SUBSCRIPTION_DETAILS = <<<'GRAPHQL'
+        query GetSubscriptionDetails {
+            subscription {
+                id
+                paymentSource
+                referralCode
+                isOnFreeTrial
+                hasPremiumEntitlement
+                __typename
+            }
+        }
+        GRAPHQL;
+}
