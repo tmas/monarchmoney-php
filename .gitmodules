@@ -1,0 +1,3 @@
+[submodule "monarchmoney-py"]
+	path = monarchmoney-py
+	url = git@github.com:hammem/monarchmoney
