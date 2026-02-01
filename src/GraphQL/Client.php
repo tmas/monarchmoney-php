@@ -38,7 +38,7 @@ class Client
      * @throws AuthenticationException
      * @throws RequestFailedException
      */
-    public function query(string $operationName, string $query, array $variables = [], bool $verbose = true): array
+    public function query(string $operationName, string $query, array $variables = [], bool $verbose = false): array
     {
         $payload = [
             'operationName' => $operationName,
