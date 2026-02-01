@@ -2,6 +2,8 @@
 
 A PHP library for interacting with the Monarch Money API. This is a PHP port of the excellent [monarchmoney](https://github.com/hammem/monarchmoney) Python library by hammem.
 
+Please note: this package is in early stages of development, and the hammem/monarchmoney Python package it's based on has been unmaintained for a while. I've only made very basic fixes so far, so things may be broken!
+
 ## Credits
 
 This library is based on the [monarchmoney](https://github.com/hammem/monarchmoney) Python library created by [hammem](https://github.com/hammem). The GraphQL queries and API structure are derived from that project.
@@ -26,8 +28,21 @@ This library intentionally does not include login functionality. You must obtain
 
 ## Installation
 
+1. Add this repo as a repository in your `composer.json`:
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/tmas/monarchmoney-php.git"
+    }
+  ]
+}
+```
+
+2. Install as a package:
 ```bash
-composer require tmas/monarchmoney-php
+composer require tmas/monarchmoney-php:dev-main
 ```
 
 ## Getting Your Session Token
@@ -185,10 +200,6 @@ $result = $client->query(
     ['variable' => 'value']
 );
 ```
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
 
 ## Disclaimer
 
